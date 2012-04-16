@@ -1,4 +1,4 @@
-/*! Socket.IO.js build:0.9.3, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
+/*! Socket.IO.js build:0.9.3-1.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
 
 /**
  * socket.io
@@ -22,7 +22,7 @@
    * @api public
    */
 
-  io.version = '0.9.3';
+  io.version = '0.9.3-1.goinstant';
 
   /**
    * Protocol implemented.
@@ -1334,7 +1334,7 @@
   Transport.prototype.onDisconnect = function () {
     if (this.close && this.open) this.close();
     this.clearTimeouts();
-    this.socket.onDisconnect();
+    this.socket.onDisconnect('close timeout');
     return this;
   };
 
@@ -1504,6 +1504,11 @@
     };
 
     io.util.merge(this.options, options);
+    this.options.transports = options.transports || this.options.transports;
+
+    if (this.options.secure) {
+      this.options.query = ((this.options.query) ? this.options.query + '&' : '') + 'secure=true';
+    }
 
     this.connected = false;
     this.open = false;
@@ -1584,8 +1589,10 @@
 
     function complete (data) {
       if (data instanceof Error) {
+        self.publish('handshake_failed', data);
         self.onError(data.message);
       } else {
+        self.publish('handshake', data);
         fn.apply(null, data.split(':'));
       }
     };
@@ -1598,7 +1605,8 @@
         , io.util.query(this.options.query, 't=' + +new Date)
       ].join('/');
 
-    if (this.isXDomain() && !io.util.ua.hasCORS) {
+    if (!io.util.ua.hasCORS) {
+      self.publish('handshaking', 'jsonp');
       var insertAt = document.getElementsByTagName('script')[0]
         , script = document.createElement('script');
 
@@ -1610,6 +1618,7 @@
         script.parentNode.removeChild(script);
       });
     } else {
+      self.publish('handshaking', 'xhr');
       var xhr = io.util.request();
 
       xhr.open('GET', url, true);
@@ -1640,7 +1649,7 @@
 
     for (var i = 0, transport; transport = transports[i]; i++) {
       if (io.Transport[transport]
-        && io.Transport[transport].check(this)
+        && io.Transport[transport].check(this, this.isXDomain())
         && (!this.isXDomain() || io.Transport[transport].xdomainCheck())) {
         return new io.Transport[transport](this, this.sessionid);
       }
@@ -1690,6 +1699,8 @@
           if (self.options['connect timeout']) {
             self.connectTimeoutTimer = setTimeout(function () {
               if (!self.connected) {
+                self.disconnect();
+                self.publish('connect_timeout', self.transport.name);
                 self.connecting = false;
 
                 if (self.options['try multiple transports']) {
@@ -1738,6 +1749,7 @@
 
     var self = this;
     this.heartbeatTimeoutTimer = setTimeout(function () {
+      if (!self.transport) return; //self.publish('connect_failed');
       self.transport.onClose();
     }, this.heartbeatTimeout);
   };
@@ -1836,7 +1848,7 @@
    */
 
   Socket.prototype.onConnect = function () {
-    if (!this.connected) {
+    if (!this.connected && this.open && this.connecting) {
       this.connected = true;
       this.connecting = false;
       if (!this.doBuffer) {
