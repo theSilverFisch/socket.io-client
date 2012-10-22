@@ -1,4 +1,4 @@
-/*! Socket.IO.js build:0.9.3-1.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
+/*! Socket.IO.js build:0.9.3-2.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
 
 /**
  * socket.io
@@ -22,7 +22,7 @@
    * @api public
    */
 
-  io.version = '0.9.3-1.goinstant';
+  io.version = '0.9.3-2.goinstant';
 
   /**
    * Protocol implemented.
@@ -3498,7 +3498,9 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
     io.Transport.XHR.prototype.onClose.call(this);
 
     if (this.xhr) {
-      this.xhr.onreadystatechange = this.xhr.onload = this.xhr.onerror = empty;
+      try {
+        this.xhr.onreadystatechange = this.xhr.onload = this.xhr.onerror = empty;
+      } catch(e){}
       try {
         this.xhr.abort();
       } catch(e){}
