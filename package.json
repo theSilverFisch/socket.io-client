@@ -28,8 +28,8 @@
       , "express": "2.5.x"
       , "jade": "*"
       , "stylus": "*"
-      , "socket.io": "http://github.com/gavinuhma/socket.io/tarball/0.9.11.goinstant"
-      , "socket.io-client": "http://github.com/gavinuhma/socket.io-client/tarball/0.9.11.goinstant"
+      , "socket.io": "http://github.com/gavinuhma/socket.io/tarball/0.9.11-3.goinstant"
+      , "socket.io-client": "http://github.com/gavinuhma/socket.io-client/tarball/0.9.11-3.goinstant"
       , "should": "*"
     }
   , "engines": { "node": ">= 0.4.0" }
