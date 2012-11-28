@@ -1,7 +1,7 @@
 {
     "name": "socket.io-client"
   , "description": "Socket.IO client for the browser and node.js"
-  , "version": "0.9.11.goinstant"
+  , "version": "0.9.11"
   , "main" : "./lib/io.js"
   , "browserify": "./dist/socket.io.js"
   , "homepage": "http://socket.io"
@@ -28,8 +28,8 @@
       , "express": "2.5.x"
       , "jade": "*"
       , "stylus": "*"
-      , "socket.io": "http://github.com/gavinuhma/socket.io/tarball/0.9.11-4.goinstant"
-      , "socket.io-client": "http://github.com/gavinuhma/socket.io-client/tarball/0.9.11-4.goinstant"
+      , "socket.io": "http://github.com/gavinuhma/socket.io/tarball/0.9.11-5.goinstant"
+      , "socket.io-client": "http://github.com/gavinuhma/socket.io-client/tarball/0.9.11-5.goinstant"
       , "should": "*"
     }
   , "engines": { "node": ">= 0.4.0" }
