@@ -1,4 +1,4 @@
-/*! Socket.IO.js build:0.9.3, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
+/*! Socket.IO.js build:0.9.3-5.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
 
 /**
  * socket.io
@@ -22,7 +22,7 @@
    * @api public
    */
 
-  io.version = '0.9.3';
+  io.version = '0.9.3-5.goinstant';
 
   /**
    * Protocol implemented.
