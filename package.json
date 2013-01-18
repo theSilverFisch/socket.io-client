@@ -15,7 +15,7 @@
     ]
   , "repository": {
         "type": "git"
-      , "url": "https://github.com/LearnBoost/socket.io-client.git"
+      , "url": "https://github.com/goinstant/socket.io-client.git"
     }
   , "dependencies": {
         "uglify-js": "1.2.5"
@@ -28,8 +28,8 @@
       , "express": "2.5.x"
       , "jade": "*"
       , "stylus": "*"
-      , "socket.io": "http://github.com/gavinuhma/socket.io/tarball/0.9.3-2.goinstant"
-      , "socket.io-client": "http://github.com/gavinuhma/socket.io-client/tarball/0.9.3-3.goinstant"
+      , "socket.io": "http://github.com/goinstant/socket.io/tarball/0.9.3-5.goinstant"
+      , "socket.io-client": "http://github.com/goinstant/socket.io-client/tarball/0.9.3-4.test.goinstant"
     }
   , "engines": { "node": ">= 0.4.0" }
 }
