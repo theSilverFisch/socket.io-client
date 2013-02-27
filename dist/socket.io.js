@@ -1,4 +1,4 @@
-/*! Socket.IO.js build:0.9.3-11.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
+/*! Socket.IO.js build:0.9.3-12.goinstant, development. Copyright(c) 2011 LearnBoost <dev@learnboost.com> MIT Licensed */
 
 /**
  * socket.io
@@ -22,7 +22,7 @@
    * @api public
    */
 
-  io.version = '0.9.3-11.goinstant';
+  io.version = '0.9.3-12.goinstant';
 
   /**
    * Protocol implemented.
@@ -323,7 +323,7 @@
 
     for (prop in additional) {
       if (additional.hasOwnProperty(prop) && util.indexOf(seen, prop) < 0) {
-        if (typeof target[prop] !== 'object' || !depth) {
+        if (typeof target[prop] !== 'object' || util.isArray(target[prop]) || !depth) {
           target[prop] = additional[prop];
           seen.push(additional[prop]);
         } else {
